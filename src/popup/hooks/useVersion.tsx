@@ -17,12 +17,12 @@ export function useVersion(): {
       try {
         const response: ResponseType = await sendMessage({ type: MESSAGE_TYPES.GET_VERSION });
         if (response?.type === "success") {
-          setVersion(response.data.version)
+          setVersion(response.data.version);
         }
       } catch (error: unknown) {
         if (error instanceof Error) {
           console.log("Error Message:", error.message);
-          setError(error.message)
+          setError(error.message);
         }
         else {
           console.log("Unknown Error Occured:", error);

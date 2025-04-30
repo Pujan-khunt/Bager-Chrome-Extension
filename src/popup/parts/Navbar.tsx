@@ -1,5 +1,6 @@
-import { PlusIcon, SettingsIcon, SunIcon } from "lucide-react";
+import { PlusIcon, SettingsIcon } from "lucide-react";
 import React from "react";
+import ThemeToggle from "../components/navbar/ThemeToggle";
 
 const Navbar: React.FC = () => {
   return (
@@ -12,9 +13,7 @@ const Navbar: React.FC = () => {
         <div className="p-1 border-2 border-transparent hover:border-gray-600 hover:rounded-md box-border transition-all duration-150">
           <PlusIcon cursor="pointer" />
         </div>
-        <div className="p-1 border-2 border-transparent hover:border-gray-600 hover:rounded-md box-border transition-all duration-150">
-          <SunIcon cursor="pointer" />
-        </div>
+        <ThemeToggle />
         <div className="p-1 border-2 border-transparent hover:border-gray-600 hover:rounded-md box-border transition-all duration-150">
           <SettingsIcon cursor="pointer" />
         </div>

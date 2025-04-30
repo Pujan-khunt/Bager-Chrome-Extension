@@ -46,11 +46,11 @@ const Version: React.FC<VersionProps> = ({ loading, error, version }: VersionPro
         ? <span className="text-sm">Loading version...</span>
         : error
           ? <VersionErrorMessage errorMessage={error} />
-          : <span>Bager v{version}`</span>
+          : <span>Bager v{version}</span>
       }
     </div>
-  )
-}
+  );
+};
 
 type VersionErrorMessageProps = {
   errorMessage: string,
@@ -68,7 +68,7 @@ const VersionErrorMessage: React.FC<VersionErrorMessageProps> = ({ errorMessage 
         Error Fetching Version: {errorMessage}
       </HoverCardContent>
     </HoverCard>
-  )
-}
+  );
+};
 
 export default Footer;

@@ -8,19 +8,19 @@ export function sendMessage<T extends MessageType>(message: T): Promise<Response
       // Issue regarding message channel with onmessage event listener callback.
       // Probably forgot to return true to keep the message channel active.
       if (lastError) {
-        reject(new Error(`Chrome runtime error: ${lastError.message} 😡`))
+        reject(new Error(`Chrome runtime error: ${lastError.message} 😡`));
         return;
       }
 
       if (!response) {
-        reject(new Error("No Response Recieved From Background Script 🥲"))
+        reject(new Error("No Response Recieved From Background Script 🥲"));
       }
 
       if (response.type === "error") {
-        reject(new Error(response.error))
+        reject(new Error(response.error));
       }
 
       resolve(response);
     });
-  })
+  });
 }

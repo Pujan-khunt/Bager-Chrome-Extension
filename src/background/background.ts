@@ -19,8 +19,7 @@ export type ResponseType =
   | VersionResponse
   | ErrorResponse
 
-chrome.runtime.onMessage.addListener((message: MessageType, sender: chrome.runtime.MessageSender, sendResponse: (response: ResponseType) => void) => {
-  console.log("Sender Information:", sender);
+chrome.runtime.onMessage.addListener((message: MessageType, _sender: chrome.runtime.MessageSender, sendResponse: (response: ResponseType) => void) => {
   console.log("Message Recieved by Background:", message);
 
   switch (message.type) {
