@@ -1,24 +1,40 @@
 import { MESSAGE_TYPES } from "@/shared";
 import { useEffect, useState } from "react";
+import { sendMessage } from "../utils/chromeAPI";
+import { ResponseType } from "@/background/background";
 
-export function useVersion(): string {
-  const [version, setVersion] = useState("X.Y.Z");
+export function useVersion(): {
+  version: string,
+  loading: boolean,
+  error: string | null
+} {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [version, setVersion] = useState<string>("X.Y.Z");
 
   useEffect(() => {
-    const fetchVersion = () => {
-      chrome.runtime.sendMessage({
-        type: MESSAGE_TYPES.GET_VERSION
-      }, (response) => {
-        console.log("response:", response);
-        if (response?.data?.version) {
-          setVersion(response.data.version);
+    const fetchVersion: () => void = async () => {
+      try {
+        const response: ResponseType = await sendMessage({ type: MESSAGE_TYPES.GET_VERSION });
+        if (response?.type === "success") {
+          setVersion(response.data.version)
         }
-      });
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.log("Error Message:", error.message);
+          setError(error.message)
+        }
+        else {
+          console.log("Unknown Error Occured:", error);
+          setError("An unknown error occured.");
+        }
+      } finally {
+        setLoading(false);
+      }
     };
-    console.log("Version after sending message:", version);
 
     fetchVersion();
   }, []);
 
-  return version;
+  return { version, loading, error };
 }

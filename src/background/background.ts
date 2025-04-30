@@ -1,11 +1,23 @@
 import { MESSAGE_TYPES } from "@/shared";
 
-type MessageType =
+export type MessageType =
   | { type: MESSAGE_TYPES.GET_VERSION };
 
-type ResponseType =
-  | { data: any }
-  | { error: string }
+type VersionResponse = {
+  type: "success",
+  data: {
+    version: string
+  }
+}
+
+export type ErrorResponse = {
+  type: "error",
+  error: string
+}
+
+export type ResponseType =
+  | VersionResponse
+  | ErrorResponse
 
 chrome.runtime.onMessage.addListener((message: MessageType, sender: chrome.runtime.MessageSender, sendResponse: (response: ResponseType) => void) => {
   console.log("Sender Information:", sender);
@@ -25,6 +37,7 @@ chrome.runtime.onMessage.addListener((message: MessageType, sender: chrome.runti
 function getVersion(sendResponse: (response: ResponseType) => void): boolean {
   const manifest = chrome.runtime.getManifest();
   sendResponse({
+    type: "success",
     data: {
       version: manifest.version
     }
@@ -34,6 +47,7 @@ function getVersion(sendResponse: (response: ResponseType) => void): boolean {
 
 function handleDefault(message: MessageType, sendResponse: (response: ResponseType) => void) {
   sendResponse({
+    type: "error",
     error: `Invalid Message Type. No Handler Defined For The Message Type: ${message.type}`
   });
 }
