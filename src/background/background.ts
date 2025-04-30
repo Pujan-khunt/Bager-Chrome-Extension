@@ -15,9 +15,14 @@ export type ErrorResponse = {
   error: string
 }
 
+type MockResponse = {
+  type: "mock"
+}
+
 export type ResponseType =
   | VersionResponse
   | ErrorResponse
+  | MockResponse
 
 chrome.runtime.onMessage.addListener((message: MessageType, _sender: chrome.runtime.MessageSender, sendResponse: (response: ResponseType) => void) => {
   console.log("Message Recieved by Background:", message);
@@ -49,4 +54,5 @@ function handleDefault(message: MessageType, sendResponse: (response: ResponseTy
     type: "error",
     error: `Invalid Message Type. No Handler Defined For The Message Type: ${message.type}`
   });
+  return true;
 }
