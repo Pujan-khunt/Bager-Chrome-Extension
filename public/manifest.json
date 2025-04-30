@@ -1,0 +1,16 @@
+{
+  "name": "Bager",
+  "description": "Convert your mess of bookmarks into an organized pile.",
+  "author": "Pujan Khunt",
+  "version": "0.0.0",
+  "manifest_version": 3,
+  "permissions": ["scripting", "bookmarks"],
+  "action": {
+    "default_title": "Bager",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background/background.js",
+    "type": "module"
+  }
+}
