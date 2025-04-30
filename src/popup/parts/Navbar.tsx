@@ -8,14 +8,14 @@ const Navbar: React.FC = () => {
       <p className="grow text-white font-extrabold text-2xl">Bager</p>
 
       {/* Utility Buttons - Right */}
-      <div className="flex gap-x-4 items-center text-white">
-        <div className="p-1 border-2 border-transparent hover:border-blue-600 hover:rounded-md box-border transition-all duration-150">
+      <div className="flex gap-x-3 items-center text-white">
+        <div className="p-1 border-2 border-transparent hover:border-gray-600 hover:rounded-md box-border transition-all duration-150">
           <PlusIcon cursor="pointer" />
         </div>
-        <div className="p-1 border-2 border-transparent hover:border-yellow-400 hover:rounded-md box-border transition-all duration-150">
+        <div className="p-1 border-2 border-transparent hover:border-gray-600 hover:rounded-md box-border transition-all duration-150">
           <SunIcon cursor="pointer" />
         </div>
-        <div className="p-1 border-2 border-transparent hover:border-gray-400 hover:rounded-md box-border transition-all duration-150">
+        <div className="p-1 border-2 border-transparent hover:border-gray-600 hover:rounded-md box-border transition-all duration-150">
           <SettingsIcon cursor="pointer" />
         </div>
       </div>

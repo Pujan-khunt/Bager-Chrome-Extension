@@ -6,9 +6,9 @@ import { Separator } from "@/components/ui/separator";
 
 const Popup: React.FC = () => {
   return (
-    <div className="w-[380px] h-[600px] bg-black">
+    <div className="w-[380px] h-[600px] bg-black relative">
       <Navbar />
-      <Separator/>
+      <Separator />
       <Main />
       <Footer />
     </div>
