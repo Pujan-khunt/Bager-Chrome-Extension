@@ -1,8 +1,8 @@
-import { MessageType, ResponseType } from "@/background/background.ts";
+import { MessageType, ResponseType } from "@/shared/messages";
 
 const isDevelopmentServer: boolean = !chrome.runtime?.id;
 
-export function sendMessage<T extends MessageType>(message: T): Promise<ResponseType> {
+export function sendMessage(message: MessageType): Promise<ResponseType> {
   if (isDevelopmentServer) {
     return Promise.resolve({ type: "mock" });
   }

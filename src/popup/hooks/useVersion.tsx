@@ -1,7 +1,6 @@
-import { MESSAGE_TYPES } from "@/shared";
+import { MESSAGE_TYPES, ResponseType } from "@/shared/messages";
 import { useEffect, useState } from "react";
 import { sendMessage } from "../utils/chromeAPI";
-import { ResponseType } from "@/background/background";
 
 export function useVersion(): {
   version: string,

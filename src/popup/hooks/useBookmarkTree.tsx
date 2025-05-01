@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { sendMessage } from "../utils/chromeAPI";
-import { MESSAGE_TYPES } from "@/shared";
-import { ResponseType } from "@/background/background";
-
+import { MESSAGE_TYPES, ResponseType } from "@/shared/messages";
 
 const useBookmarkTree: () => {
   bookmarkTree: chrome.bookmarks.BookmarkTreeNode[],
