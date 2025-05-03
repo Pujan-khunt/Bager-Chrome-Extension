@@ -18,19 +18,23 @@ const useBookmarkTree: () => {
           type: MESSAGE_TYPES.GET_BOOKMARK_TREE
         });
 
+        console.log("BookmarkTree response:\n", response)
         switch (response?.type) {
           case "bookmark-tree":
-            setBookmarkTree(response.data.tree);
+            setBookmarkTree(response.data.tree[0].children || []);
             break;
           case "error":
             setError(response.error);
+            break;
+          case "mock":
+            setBookmarkTree(response.data);
             break;
           default:
             setError("Unexpected Response Type");
         }
       } catch (error: unknown) {
         if (error instanceof Error) {
-          console.error("Error fetching bookmarks", error.message);
+          console.error("Error fetching bookmarks\n", error.message);
           setError(error.message);
         } else {
           console.error("Unexpected Error:", error);

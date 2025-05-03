@@ -10,7 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         popup: path.resolve(__dirname, "popup.html"),
-        background: path.resolve(__dirname, "src/background/background.ts"),
+        background: path.resolve(__dirname, "src/background/index.ts"),
         content: path.resolve(__dirname, "src/content/content.tsx")
       },
       output: {

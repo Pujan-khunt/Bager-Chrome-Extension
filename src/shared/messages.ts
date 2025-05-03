@@ -19,15 +19,30 @@ export type ErrorResponse = {
   error: string
 }
 
-export type MockResponse = {
+export interface Mock {
   type: "mock"
 }
+
+export interface MockVersion extends Mock {
+  version: string
+}
+
+export interface MockBookmarkTree extends Mock {
+  data: chrome.bookmarks.BookmarkTreeNode[]
+};
+
+export type MockResponse = MockVersion | MockBookmarkTree;
 
 export type BookmarkTreeResponse = {
   type: "bookmark-tree",
   data: {
     tree: chrome.bookmarks.BookmarkTreeNode[]
   }
+}
+
+export type MessageResponseMap = {
+  [MESSAGE_TYPES.GET_VERSION]: VersionResponse | MockVersion | ErrorResponse
+  [MESSAGE_TYPES.GET_BOOKMARK_TREE]: BookmarkTreeResponse | MockBookmarkTree | ErrorResponse
 }
 
 export type ResponseType =

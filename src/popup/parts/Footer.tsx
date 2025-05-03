@@ -3,7 +3,6 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { Separator } from "@/components/ui/separator";
 import { useVersion } from "../hooks/useVersion";
 
 const Footer: React.FC = () => {
@@ -12,7 +11,6 @@ const Footer: React.FC = () => {
   return (
     <>
       <div className="text-white w-full bg-[#1a1a1a] h-8 flex px-4 items-center">
-        <Separator className="absolute top-0 left-0" />
         {/* Version - Left */}
         <Version loading={loading} error={error} version={version} />
 

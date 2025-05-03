@@ -1,33 +1,47 @@
-import { MessageType, ResponseType } from "@/shared/messages";
+import {
+  MessageResponseMap,
+  MessageType,
+} from "@/shared/messages";
+import { mockResponses } from "./mockData";
 
-const isDevelopmentServer: boolean = !chrome.runtime?.id;
+const isDevelopmentServer: boolean = location?.protocol?.startsWith("http") || location?.hostname === "localhost";
 
-export function sendMessage(message: MessageType): Promise<ResponseType> {
+// Helper to extract message type
+type ExtractMessageType<T extends MessageType> = T["type"];
+
+// Function implementation
+export function sendMessage<T extends MessageType>(
+  message: T
+): Promise<MessageResponseMap[ExtractMessageType<T>]> {
   if (isDevelopmentServer) {
-    return Promise.resolve({ type: "mock" });
-  }
-  else {
+    return Promise.resolve(
+      mockResponses[message.type] as MessageResponseMap[ExtractMessageType<T>]
+    );
+  } else {
     return new Promise((resolve, reject) => {
-      chrome.runtime.sendMessage(message, (response: ResponseType) => {
-        const lastError = chrome.runtime.lastError;
+      chrome.runtime.sendMessage(
+        message,
+        (response: MessageResponseMap[ExtractMessageType<T>]) => {
+          const lastError = chrome.runtime.lastError;
 
-        // Issue regarding message channel with onmessage event listener callback.
-        // Probably forgot to return true to keep the message channel active.
-        if (lastError) {
-          reject(new Error(`Chrome runtime error: ${lastError.message} 😡`));
-          return;
+          if (lastError) {
+            reject(new Error(`Chrome runtime error: ${lastError.message} 😡`));
+            return;
+          }
+
+          if (!response) {
+            reject(new Error("No Response Received From Background Script 🥲"));
+            return;
+          }
+
+          if ((response as any).type === "error") {
+            reject(new Error((response as any).error));
+            return;
+          }
+
+          resolve(response);
         }
-
-        if (!response) {
-          reject(new Error("No Response Recieved From Background Script 🥲"));
-        }
-
-        if (response.type === "error") {
-          reject(new Error(response.error));
-        }
-
-        resolve(response);
-      });
+      );
     });
   }
 }
