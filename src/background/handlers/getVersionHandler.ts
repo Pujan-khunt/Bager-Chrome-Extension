@@ -8,7 +8,7 @@ export const getVersionHandler: () => Promise<ResponseType> = async () => {
       data: {
         version: response.version
       }
-    }
+    };
 
     return versionResponse;
   } catch (error: unknown) {
@@ -17,9 +17,9 @@ export const getVersionHandler: () => Promise<ResponseType> = async () => {
     const errorResponse: ResponseType = {
       type: "error",
       error: "Unexpected Error from getVersionHandler"
-    }
+    };
 
     return errorResponse;
   }
-}
+};
 

@@ -8,7 +8,7 @@ export const getBookmarkTreeHandler: () => Promise<ResponseType> = async () => {
       data: {
         tree: response
       }
-    }
+    };
 
     return bookmarkTreeResponse;
   } catch (error: unknown) {
@@ -17,9 +17,9 @@ export const getBookmarkTreeHandler: () => Promise<ResponseType> = async () => {
     const errorResponse: ResponseType = {
       type: "error",
       error: "Unexpected Error from getBookmarkTreeHandler"
-    }
+    };
 
     return errorResponse;
   }
-}
+};
 

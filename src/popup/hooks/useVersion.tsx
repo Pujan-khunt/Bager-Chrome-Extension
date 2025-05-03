@@ -15,7 +15,7 @@ export function useVersion(): {
     const fetchVersion: () => void = async () => {
       try {
         const response: ResponseType = await sendMessage({ type: MESSAGE_TYPES.GET_VERSION });
-        console.log("Version Response\n", response)
+        console.log("Version Response\n", response);
 
         switch (response?.type) {
           case "version":
@@ -28,7 +28,7 @@ export function useVersion(): {
             setVersion(response.version);
             break;
           default:
-            setError("Unexpected Response Type")
+            setError("Unexpected Response Type");
         }
       } catch (error: unknown) {
         if (error instanceof Error) {

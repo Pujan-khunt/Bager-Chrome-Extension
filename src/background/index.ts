@@ -5,7 +5,7 @@ import { getBookmarkTreeHandler } from "./handlers/getBookmarkTreeHandler";
 const handlers: Record<MESSAGE_TYPES, () => Promise<ResponseType>> = {
   [MESSAGE_TYPES.GET_BOOKMARK_TREE]: getBookmarkTreeHandler,
   [MESSAGE_TYPES.GET_VERSION]: getVersionHandler,
-}
+};
 
 chrome.runtime.onMessage.addListener(
   (
@@ -28,13 +28,13 @@ chrome.runtime.onMessage.addListener(
           sendResponse({
             type: "error",
             error: error.message
-          })
+          });
         } else {
           console.error("Unexpected Error from onMessage handler", error);
           sendResponse({
             type: "error",
             error: "Default Error Response. Unexpected Error in onMessage Handler"
-          })
+          });
         }
       }
     };

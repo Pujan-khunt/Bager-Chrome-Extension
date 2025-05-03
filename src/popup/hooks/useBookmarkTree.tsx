@@ -18,7 +18,7 @@ const useBookmarkTree: () => {
           type: MESSAGE_TYPES.GET_BOOKMARK_TREE
         });
 
-        console.log("BookmarkTree response:\n", response)
+        console.log("BookmarkTree response:\n", response);
         switch (response?.type) {
           case "bookmark-tree":
             setBookmarkTree(response.data.tree[0].children || []);
@@ -41,7 +41,7 @@ const useBookmarkTree: () => {
           setError("Unexpected Error Occured! 🥲");
         }
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     };
 
